@@ -8,6 +8,7 @@ import AppError from "./utils/appError.js";
 import connectDB from "./config/db.js";
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/user.js";
+import blogRoutes from "./routes/blog.js";
 
 const server = express();
 
@@ -22,6 +23,7 @@ connectDB();
 //routes
 server.use("/api/auth", authRoutes);
 server.use("/api/user", userRoutes);
+server.use("/api/blogs", blogRoutes);
 
 //catch not founded routes and forwards to error handlers
 server.use((req, res, next) => {

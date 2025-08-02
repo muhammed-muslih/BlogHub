@@ -43,7 +43,7 @@ const registerUser = asyncHandler(async (req, res, next) => {
 
   res.status(201).json({
     status: "success",
-    message: "New user registered",
+    message: "New user registered successfully ",
     token,
   });
 });
