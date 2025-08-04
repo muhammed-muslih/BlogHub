@@ -44,7 +44,6 @@ const registerUser = asyncHandler(async (req, res, next) => {
   res.status(201).json({
     status: "success",
     message: "New user registered successfully ",
-    token,
   });
 });
 
@@ -61,7 +60,7 @@ const loginUser = asyncHandler(async (req, res, next) => {
     ? await userServices.findUserByUserName(userName)
     : await userServices.findUserByEmail(email);
   if (!user) {
-    throw new AppError("Invalid username/email or password.", 401);
+    throw new AppError("Invalid username or email.", 401);
   }
 
   const isPasswordValid = await authServices.verifyPassword(
@@ -69,7 +68,7 @@ const loginUser = asyncHandler(async (req, res, next) => {
     password
   );
   if (!isPasswordValid) {
-    throw new AppError("Invalid username/email or password.", 401);
+    throw new AppError("Invalid password.", 401);
   }
 
   const token = authServices.generateToken({
@@ -87,7 +86,6 @@ const loginUser = asyncHandler(async (req, res, next) => {
   res.status(200).json({
     status: "success",
     message: "Logged in successfully",
-    token, // optional
   });
 });
 

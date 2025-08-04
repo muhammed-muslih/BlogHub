@@ -9,4 +9,5 @@ export const config = {
     SECRET: process.env.JWT_SECRET,
     EXPIRES_IN: process.env.JWT_EXPIRES_IN || "1h",
   },
+  CLIENT_BASE_URL: process.env.CLIENT_BASE_URL,
 };

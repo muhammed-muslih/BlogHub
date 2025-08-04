@@ -1,6 +1,7 @@
 import express from "express";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 import colors from "colors";
 import { config } from "./config/config.js";
 import errorHandler from "./middlewares/errorHandler.js";
@@ -12,6 +13,12 @@ import blogRoutes from "./routes/blog.js";
 
 const server = express();
 
+server.use(
+  cors({
+    origin: config.CLIENT_BASE_URL, 
+    credentials: true,
+  })
+);
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 server.use(morgan("dev"));
