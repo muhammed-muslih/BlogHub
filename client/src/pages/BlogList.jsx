@@ -1,19 +1,28 @@
 import BlogCard from "../components/Blogs/BlogCard";
+import ErrorPage from "../components/common/ErrorPage";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBlogs } from "../api/blog";
-import { selectBlogs, selectTotalBlogs } from "../redux/features/blogsSlice";
+import {
+  selectBlogs,
+  selectTotalBlogs,
+  selectError,
+} from "../redux/features/blogsSlice";
 import { FaRegSadTear } from "react-icons/fa";
 
 const BlogList = () => {
   const dispatch = useDispatch();
   const blogs = useSelector(selectBlogs);
   const totalBlogs = useSelector(selectTotalBlogs);
+  const error = useSelector(selectError);
 
   useEffect(() => {
     dispatch(fetchBlogs());
   }, [dispatch]);
 
+  if (error) {
+    return <ErrorPage message={`Failed to load blogs: ${error}`} />;
+  }
   return (
     <div className="container mx-auto px-4 py-8">
       {totalBlogs === 0 ? (

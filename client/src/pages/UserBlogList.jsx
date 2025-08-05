@@ -1,10 +1,12 @@
 import BlogCard from "../components/Blogs/BlogCard";
+import ErrorPage from "../components/common/ErrorPage";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserBlogs } from "../api/blog";
 import {
   selectUserBlogs,
   selectUserTotalBlogs,
+  selectUserBlogErorr,
 } from "../redux/features/blogsSlice";
 import { FaRegSadTear } from "react-icons/fa";
 
@@ -12,10 +14,15 @@ const UserBlogList = () => {
   const dispatch = useDispatch();
   const blogs = useSelector(selectUserBlogs);
   const totalUserBlogs = useSelector(selectUserTotalBlogs);
+  const error = useSelector(selectUserBlogErorr);
 
   useEffect(() => {
     dispatch(fetchUserBlogs());
   }, [dispatch]);
+
+  if (error) {
+    return <ErrorPage message={`Failed to load your blogs: ${error}`} />;
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">

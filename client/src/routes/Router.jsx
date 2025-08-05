@@ -11,6 +11,7 @@ import SingleBlog from "../pages/SingleBlog";
 import CreateBlog from "../pages/CreateBlog";
 import EditBlog from "../pages/EditBlog";
 import UserBlogList from "../pages/UserBlogList";
+import ErrorPage from "../components/common/ErrorPage";
 
 const routes = {
   path: "/",
@@ -20,32 +21,16 @@ const routes = {
     </AuthProvider>
   ),
   children: [
-    {
-      path: "",
-      element: <BlogList />,
-    },
-    {
-      path: "blog/:id",
-      element: <SingleBlog />,
-    },
-    {
-      path: "blog/edit/:id",
-      element: <EditBlog />,
-    },
-    {
-      path: "profile",
-      element: <Profile />,
-    },
-    {
-      path: "create-blog",
-      element: <CreateBlog />,
-    },
-    {
-      path: "my-blogs",
-      element: <UserBlogList />,
-    },
+    { path: "", element: <BlogList /> },
+    { path: "blog/:id", element: <SingleBlog /> },
+    { path: "blog/edit/:id", element: <EditBlog /> },
+    { path: "profile", element: <Profile /> },
+    { path: "create-blog", element: <CreateBlog /> },
+    { path: "my-blogs", element: <UserBlogList /> },
+    { path: "*", element: <ErrorPage message="Page not found!" /> },
   ],
 };
+
 
 const authRoutes = {
   path: "/auth",
@@ -55,14 +40,8 @@ const authRoutes = {
     </PublicOnlyRoute>
   ),
   children: [
-    {
-      path: "login",
-      element: <Login />,
-    },
-    {
-      path: "register",
-      element: <Register />,
-    },
+    { path: "login", element: <Login /> },
+    { path: "register", element: <Register /> },
   ],
 };
 
