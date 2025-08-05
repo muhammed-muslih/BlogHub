@@ -58,7 +58,6 @@ const Login = () => {
       const res = await loginUser(payload);
       console.log("Login successful:", res.data);
       if (res.data?.status === "success") {
-        localStorage.setItem("isLoggedIn", "true");
         dispatch(setLoggedIn(true));
       }
       navigate("/");

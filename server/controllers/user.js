@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 import * as userServices from "../services/user.js";
 import AppError from "../utils/appError.js";
+import * as blogServices from "../services/blog.js";
 
 //get current user’s profile
 //@route POST /api/user/me
@@ -14,7 +15,7 @@ const getCurrentUser = asyncHandler(async (req, res, next) => {
 
   res.status(200).json({
     status: "success",
-    data: {
+    user: {
       id: user.id,
       userName: user.userName,
       email: user.email,
@@ -23,4 +24,18 @@ const getCurrentUser = asyncHandler(async (req, res, next) => {
   });
 });
 
-export { getCurrentUser };
+//get user blogs
+//@route GET /api/user/blogs
+const fetchUserBlogs = asyncHandler(async (req, res, next) => {
+  const { id: userId } = req.user;
+
+  const blogs = await blogServices.fetchUserBlogs(userId);
+
+  res.status(200).json({
+    status: "success",
+    count: blogs.length,
+    data: blogs ?? [],
+  });
+});
+
+export { getCurrentUser, fetchUserBlogs };

@@ -1,12 +1,13 @@
 import { useSelector } from "react-redux";
-import { isLoggedIn } from "../redux/features/authSlice";
-import { Navigate } from "react-router-dom";
+import { selectIsLoggedIn } from "../redux/features/authSlice";
+import { Navigate, useLocation } from "react-router-dom";
 
 const PublicOnlyRoute = ({ children }) => {
-  const loggedInStatus = useSelector(isLoggedIn);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const location = useLocation();
 
-  if (loggedInStatus) {
-    return <Navigate to="/" />;
+  if (isLoggedIn) {
+    return <Navigate to={location.state?.from || "/"} replace />;
   }
 
   return children;

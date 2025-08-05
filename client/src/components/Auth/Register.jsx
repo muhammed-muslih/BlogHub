@@ -6,9 +6,14 @@ import { useState } from "react";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { registerUser } from "../../api/auth";
+import { useDispatch } from "react-redux";
+import { setLoggedIn } from "../../redux/features/authSlice";
+import { useNavigate } from "react-router";
 
 const Register = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const validationSchema = yup.object().shape({
     userName: yup
@@ -50,8 +55,9 @@ const Register = () => {
       const res = await registerUser(payload);
       console.log("registerd succesfully:", res.data);
       if (res.data?.status === "success") {
-        localStorage.setItem("isLoggedIn", "true");
+        dispatch(setLoggedIn(true));
       }
+      navigate("/");
       actions.resetForm();
     } catch (error) {
       console.error("User registration failed:", error);

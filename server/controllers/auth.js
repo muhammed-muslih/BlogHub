@@ -38,7 +38,7 @@ const registerUser = asyncHandler(async (req, res, next) => {
     httpOnly: true,
     secure: config.ENV === "production",
     sameSite: "strict",
-    maxAge: 60 * 60 * 1000, // 1 hour
+    maxAge: 24 * 60 * 60 * 1000,
   });
 
   res.status(201).json({
@@ -80,7 +80,7 @@ const loginUser = asyncHandler(async (req, res, next) => {
     httpOnly: true,
     secure: config.ENV === "production",
     sameSite: "strict",
-    maxAge: 60 * 60 * 1000, // 1 hour
+    maxAge: 24 * 60 * 60 * 1000,
   });
 
   res.status(200).json({

@@ -10,4 +10,9 @@ const loginUser = async (payload) => {
   return res;
 };
 
-export { registerUser, loginUser };
+const logoutUser = async () => {
+  const res = await apiInstance.post("/auth/logout");
+  return res;
+};
+
+export { registerUser, loginUser, logoutUser };

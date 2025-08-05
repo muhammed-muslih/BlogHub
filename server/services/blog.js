@@ -3,7 +3,9 @@ import Blog from "../models/blog.js";
 const createBlog = async (blogData) => await Blog.create(blogData);
 
 const fetchAllBlogs = async () =>
-  await Blog.find().populate("author", "userName email");
+  await Blog.find()
+    .populate("author", "userName email")
+    .sort({ createdAt: -1 });
 
 const fetchBlogById = async (id) =>
   await Blog.findById(id).populate("author", "userName email");
@@ -13,10 +15,14 @@ const updateBlogById = async (id, blogData) =>
 
 const deleteBlogById = async (id) => await Blog.findByIdAndDelete(id);
 
+const fetchUserBlogs = async (id) =>
+  await Blog.find({ author: id }).populate("author", "userName email");
+
 export {
   createBlog,
   fetchAllBlogs,
   fetchBlogById,
   updateBlogById,
   deleteBlogById,
+  fetchUserBlogs,
 };

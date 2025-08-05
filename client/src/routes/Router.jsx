@@ -5,6 +5,12 @@ import Login from "../components/Auth/Login";
 import Register from "../components/Auth/Register";
 import AuthProvider from "./AuthProvider";
 import PublicOnlyRoute from "./PublicOnlyRoute";
+import Profile from "../components/Profile/Profile";
+import BlogList from "../pages/BlogList";
+import SingleBlog from "../pages/SingleBlog";
+import CreateBlog from "../pages/CreateBlog";
+import EditBlog from "../pages/EditBlog";
+import UserBlogList from "../pages/UserBlogList";
 
 const routes = {
   path: "/",
@@ -13,7 +19,32 @@ const routes = {
       <Layout />
     </AuthProvider>
   ),
-  // errorElement: <ErrorPage />,
+  children: [
+    {
+      path: "",
+      element: <BlogList />,
+    },
+    {
+      path: "blog/:id",
+      element: <SingleBlog />,
+    },
+    {
+      path: "blog/edit/:id",
+      element: <EditBlog />,
+    },
+    {
+      path: "profile",
+      element: <Profile />,
+    },
+    {
+      path: "create-blog",
+      element: <CreateBlog />,
+    },
+    {
+      path: "my-blogs",
+      element: <UserBlogList />,
+    },
+  ],
 };
 
 const authRoutes = {

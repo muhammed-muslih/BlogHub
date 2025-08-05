@@ -22,10 +22,6 @@ const blogSchema = new mongoose.Schema(
       ref: "User",
       required: [true, "Author is required"],
     },
-    // coverImage: {
-    //   type: String,
-    //   default: "",
-    // },
   },
   {
     timestamps: true,
