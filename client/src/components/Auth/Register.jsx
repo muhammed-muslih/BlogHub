@@ -53,7 +53,6 @@ const Register = () => {
       };
 
       const res = await registerUser(payload);
-      console.log("registerd succesfully:", res.data);
       if (res.data?.status === "success") {
         dispatch(setLoggedIn(true));
       }

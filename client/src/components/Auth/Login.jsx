@@ -56,7 +56,6 @@ const Login = () => {
       };
 
       const res = await loginUser(payload);
-      console.log("Login successful:", res.data);
       if (res.data?.status === "success") {
         dispatch(setLoggedIn(true));
       }
