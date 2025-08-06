@@ -16,7 +16,7 @@ const updateBlogById = async (id, blogData) =>
 const deleteBlogById = async (id) => await Blog.findByIdAndDelete(id);
 
 const fetchUserBlogs = async (id) =>
-  await Blog.find({ author: id }).populate("author", "userName email");
+  await Blog.find({ author: id }).populate("author", "userName email").sort({ createdAt: -1 });
 
 export {
   createBlog,
