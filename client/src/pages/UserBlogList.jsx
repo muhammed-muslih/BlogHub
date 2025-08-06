@@ -7,6 +7,7 @@ import {
   selectUserBlogs,
   selectUserTotalBlogs,
   selectUserBlogErorr,
+  clearUserBlogList,
 } from "../redux/features/blogsSlice";
 import { FaRegSadTear } from "react-icons/fa";
 
@@ -18,6 +19,8 @@ const UserBlogList = () => {
 
   useEffect(() => {
     dispatch(fetchUserBlogs());
+
+    return () => dispatch(clearUserBlogList());
   }, [dispatch]);
 
   if (error) {

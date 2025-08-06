@@ -19,6 +19,16 @@ const blogsSlice = createSlice({
     setSelectedBlogId(state, action) {
       state.selectedBlogId = action.payload;
     },
+    clearBlogList: (state) => {
+      state.items = [];
+      state.error = null;
+      state.totalBlogs = null;
+    },
+    clearUserBlogList: (state) => {
+      state.userBlogs = [];
+      state.userBlogsError = null;
+      state.userTotalBlogs = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -51,7 +61,8 @@ const blogsSlice = createSlice({
       });
   },
 });
-export const { setSelectedBlogId } = blogsSlice.actions;
+export const { setSelectedBlogId, clearBlogList, clearUserBlogList } =
+  blogsSlice.actions;
 export const selectBlogs = (state) => state.blogs.items;
 export const selectError = (state) => state.blogs.error;
 export const selectLoading = (state) => state.blogs.loading;
