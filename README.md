@@ -108,7 +108,7 @@ Frontend: https://bloghubfrontend.onrender.com    (Live link)
 
 <p align="center">
   <img src="/screenshots/Screenshot from 2025-08-06 04-19-05.png" width="30%" />
-  <img src="/Screenshot from 2025-08-06 04-19-30.png" width="30%" />
+  <img src="/screenshots/Screenshot from 2025-08-06 04-19-30.png" width="30%" />
   <img src="/screenshots/Screenshot from 2025-08-06 04-19-38.png" width="30%" />
 </p>
 
