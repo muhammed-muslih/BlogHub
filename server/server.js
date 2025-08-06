@@ -16,6 +16,7 @@ const server = express();
 server.use(
   cors({
     origin: config.CLIENT_BASE_URL,
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
@@ -43,7 +44,7 @@ server.use(errorHandler);
 const PORT = config.PORT;
 
 // start server
-server.listen(PORT,() => {
+server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`.bgGreen.black);
 });
 

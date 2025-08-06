@@ -27,8 +27,6 @@ apiInstance.interceptors.response.use(
 
     if (status === 401) {
       Cookies.remove("token");
-      // Optional: redirect to login
-      // window.location.href = "/auth/login";
     }
 
     return Promise.reject(error);

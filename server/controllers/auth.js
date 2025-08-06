@@ -37,7 +37,7 @@ const registerUser = asyncHandler(async (req, res, next) => {
   res.cookie("token", token, {
     httpOnly: true,
     secure: config.ENV === "production",
-    sameSite: "strict",
+    sameSite: "None",
     maxAge: 24 * 60 * 60 * 1000,
   });
 
@@ -79,7 +79,7 @@ const loginUser = asyncHandler(async (req, res, next) => {
   res.cookie("token", token, {
     httpOnly: true,
     secure: config.ENV === "production",
-    sameSite: "strict",
+    sameSite: "None",
     maxAge: 24 * 60 * 60 * 1000,
   });
 
@@ -95,7 +95,7 @@ const logoutUser = asyncHandler(async (req, res, next) => {
   res.clearCookie("token", {
     httpOnly: true,
     secure: config.ENV === "production",
-    sameSite: "strict",
+    sameSite: "None",
   });
 
   res.status(200).json({
