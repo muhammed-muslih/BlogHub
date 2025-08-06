@@ -7,10 +7,23 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 import {
   selectedBlog,
   clearSingleBlog,
+  selectLoading,
 } from "../redux/features/singleBlogSlice";
 import { selectCurrentUser } from "../redux/features/authSlice";
 import { useState } from "react";
 import BackButton from "../components/Blogs/BackButton";
+
+const SingleBlogSkeleton = () => (
+  <div className="animate-pulse bg-white shadow-lg rounded-2xl p-6 md:p-10 space-y-6">
+    <div className="h-10 bg-gray-300 rounded w-3/4"></div>
+    <div className="h-6 bg-gray-300 rounded w-1/2"></div>
+    <div className="h-52 bg-gray-300 rounded"></div>
+    <div className="flex justify-end gap-3">
+      <div className="h-10 w-24 bg-gray-300 rounded"></div>
+      <div className="h-10 w-24 bg-gray-300 rounded"></div>
+    </div>
+  </div>
+);
 
 const SingleBlog = () => {
   const { id } = useParams();
@@ -18,9 +31,9 @@ const SingleBlog = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-
   const blog = useSelector(selectedBlog);
   const user = useSelector(selectCurrentUser);
+  const loading = useSelector(selectLoading);
 
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [deleteText, setDeleteText] = useState("");
@@ -58,68 +71,72 @@ const SingleBlog = () => {
 
   return (
     <div className="container mx-auto px-4 py-10">
-      <div className="bg-white shadow-lg rounded-2xl p-6 md:p-10 space-y-6">
-        {errorMsg && (
-          <div className="text-red-600 bg-red-100 p-3 rounded-lg">
-            {errorMsg}
-          </div>
-        )}
-        <BackButton />
-        <SingleBlogCard blog={blog} />
-        {blog?.author?._id === user?.id && (
-          <div className="flex flex-col items-end gap-3">
-            <div className="flex gap-3">
-              <button
-                onClick={handleEdit}
-                className="flex items-center gap-2 bg-blue-950 text-white px-4 py-2 rounded-lg shadow-md cursor-pointer
-                 hover:bg-blue-900 active:scale-95 transition-all duration-300 ease-in-out"
-              >
-                <FaEdit className="text-lg" />
-                Edit Blog
-              </button>
-              <button
-                onClick={() => setShowDeleteConfirm(true)}
-                className="flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded-lg shadow-md cursor-pointer
-                 hover:bg-red-500 active:scale-95 transition-all duration-300 ease-in-out"
-              >
-                <FaTrash className="text-lg" />
-                Delete Blog
-              </button>
+      {loading ? (
+        <SingleBlogSkeleton />
+      ) : (
+        <div className="bg-white shadow-lg rounded-2xl p-6 md:p-10 space-y-6">
+          {errorMsg && (
+            <div className="text-red-600 bg-red-100 p-3 rounded-lg">
+              {errorMsg}
             </div>
-
-            {showDeleteConfirm && (
-              <div className="flex items-center gap-2 mt-3">
-                <input
-                  type="text"
-                  name="deleteConfirm"
-                  value={deleteText}
-                  onChange={(e) => setDeleteText(e.target.value)}
-                  placeholder='Type "delete" to confirm'
-                  autoComplete="off"
-                  className="bg-gray-200 rounded-lg px-4 py-2 focus:outline-none border-b-4 border-gray-200 focus:border-red-600"
-                />
+          )}
+          <BackButton />
+          <SingleBlogCard blog={blog} />
+          {blog?.author?._id === user?.id && (
+            <div className="flex flex-col items-end gap-3">
+              <div className="flex gap-3">
                 <button
-                  onClick={handleDelete}
-                  className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-500 cursor-pointer"
-                  // disabled={deleteText !== "delete"}
+                  onClick={handleEdit}
+                  className="flex items-center gap-2 bg-blue-950 text-white px-4 py-2 rounded-lg shadow-md cursor-pointer
+                 hover:bg-blue-900 active:scale-95 transition-all duration-300 ease-in-out"
                 >
-                  Confirm
+                  <FaEdit className="text-lg" />
+                  Edit Blog
                 </button>
                 <button
-                  onClick={() => {
-                    setShowDeleteConfirm(false);
-                    setDeleteText("");
-                    setErrorMsg("");
-                  }}
-                  className="bg-gray-400 text-white px-4 py-2 rounded-lg hover:bg-gray-500 cursor-pointer"
+                  onClick={() => setShowDeleteConfirm(true)}
+                  className="flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded-lg shadow-md cursor-pointer
+                 hover:bg-red-500 active:scale-95 transition-all duration-300 ease-in-out"
                 >
-                  Cancel
+                  <FaTrash className="text-lg" />
+                  Delete Blog
                 </button>
               </div>
-            )}
-          </div>
-        )}
-      </div>
+
+              {showDeleteConfirm && (
+                <div className="flex items-center gap-2 mt-3">
+                  <input
+                    type="text"
+                    name="deleteConfirm"
+                    value={deleteText}
+                    onChange={(e) => setDeleteText(e.target.value)}
+                    placeholder='Type "delete" to confirm'
+                    autoComplete="off"
+                    className="bg-gray-200 rounded-lg px-4 py-2 focus:outline-none border-b-4 border-gray-200 focus:border-red-600"
+                  />
+                  <button
+                    onClick={handleDelete}
+                    className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-500 cursor-pointer"
+                    // disabled={deleteText !== "delete"}
+                  >
+                    Confirm
+                  </button>
+                  <button
+                    onClick={() => {
+                      setShowDeleteConfirm(false);
+                      setDeleteText("");
+                      setErrorMsg("");
+                    }}
+                    className="bg-gray-400 text-white px-4 py-2 rounded-lg hover:bg-gray-500 cursor-pointer"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

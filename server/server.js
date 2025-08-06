@@ -13,6 +13,10 @@ import blogRoutes from "./routes/blog.js";
 
 const server = express();
 
+server.use(express.json());
+server.use(express.urlencoded({ extended: true }));
+server.use(morgan("dev"));
+server.use(cookieParser());
 server.use(
   cors({
     origin: config.CLIENT_BASE_URL,
@@ -20,10 +24,6 @@ server.use(
     credentials: true,
   })
 );
-server.use(express.json());
-server.use(express.urlencoded({ extended: true }));
-server.use(morgan("dev"));
-server.use(cookieParser());
 
 //database connection
 connectDB();

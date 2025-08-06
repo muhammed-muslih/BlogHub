@@ -54,9 +54,11 @@ const blogsSlice = createSlice({
 export const { setSelectedBlogId } = blogsSlice.actions;
 export const selectBlogs = (state) => state.blogs.items;
 export const selectError = (state) => state.blogs.error;
+export const selectLoading = (state) => state.blogs.loading;
 export const selectTotalBlogs = (state) => state.blogs.totalBlogs;
 export const selectedBlogId = (state) => state.blogs.selectedBlogId;
 export const selectUserBlogs = (state) => state.blogs.userBlogs;
 export const selectUserTotalBlogs = (state) => state.blogs.userTotalBlogs;
 export const selectUserBlogErorr = (state) => state.blogs.userBlogsError;
+export const selectUserBlogLoading = (state) => state.blogs.userBlogsLoading;
 export default blogsSlice.reducer;

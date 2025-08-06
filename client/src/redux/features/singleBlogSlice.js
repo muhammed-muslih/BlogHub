@@ -34,4 +34,5 @@ const singleBlogSlice = createSlice({
 
 export const { clearSingleBlog } = singleBlogSlice.actions;
 export const selectedBlog = (state) => state.singleBlog.item;
+export const selectLoading = (state) => state.singleBlog.loading;
 export default singleBlogSlice.reducer;
