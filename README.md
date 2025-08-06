@@ -2,7 +2,6 @@
 
 ## 🚀 Overview
 BlogHub is a basic blogging application built with the MERN stack that allows users to register, log in, create, edit, delete, and view blog posts.  
-Additionally, a **My Blogs** feature is added to allow users to view and manage only their authored posts.
 
 ---
 
@@ -115,7 +114,7 @@ Frontend: https://bloghubfrontend.onrender.com    (Live link)
 <p align="center">
   <img src="/screenshots/Screenshot from 2025-08-06 04-19-55.png" width="30%" />
   <img src="/screenshots/Screenshot from 2025-08-06 04-20-23.png" width="30%" />
-  <img src="/screenshots/Screenshot from 2025-08-06 04-20-34.png" alt="Profile Page" width="30%" />
+  <img src="/screenshots/Screenshot from 2025-08-06 04-20-34.png" width="30%" />
 </p>
 
 
