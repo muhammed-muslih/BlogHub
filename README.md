@@ -100,7 +100,7 @@ npm start
 
 Backend: https://bloghubbackend-wt7v.onrender.com
 
-Frontend: https://bloghubfrontend.onrender.com    (Live link)
+Frontend: [Live Link](https://bloghubfrontend.onrender.com)
 
 ```
 ## 📸 Screenshots
